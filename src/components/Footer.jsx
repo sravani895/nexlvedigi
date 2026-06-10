@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const ref = useRef(null);
@@ -57,15 +58,20 @@ export const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
           <ul className="space-y-3 text-gray-700">
-            {["Services", "Blog"].map((item, i) => (
-              <motion.li
-                key={i}
-                whileHover={{ x: 8 }}
-                className="cursor-pointer"
-              >
-                {item}
-              </motion.li>
-            ))}
+            {[
+              { name: "Services", path: "/services" },
+              { name: "Blog", path: "/blog" },
+            ].map((item, i) => (
+            <motion.li
+              key={i}
+              whileHover={{ x: 8 }}
+              className="cursor-pointer"
+            >
+            <Link to={item.path}>
+              {item.name}
+            </Link>
+          </motion.li>
+          ))}
           </ul>
         </div>
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -72,9 +73,11 @@ export const ServicesDetail = () => {
           Ready to Grow Your Business?
         </h2>
 
-        <button className="mt-6 bg-black text-white px-6 py-3 rounded-full">
-          Get Free Consultation
-        </button>
+        <Link to="/contact">
+          <button className="mt-6 bg-black text-white px-6 py-3 rounded-full">
+             Get Free Consultation
+          </button>
+        </Link>
       </div>
 
     </section>

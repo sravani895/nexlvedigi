@@ -12,33 +12,30 @@ import { Detail } from "./components/Detail";
 import { About } from "./pages/About";
 import { ServicesDetail } from "./pages/ServicesDetail";
 import { Contact } from "./components/Contact";
+import { Blog } from "./pages/Blog";
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(() => {
+    return !sessionStorage.getItem("site_loaded");
+  });
 
   useEffect(() => {
-    const alreadyLoaded = sessionStorage.getItem("site_loaded");
+    if (!loading) return;
 
-    if (!alreadyLoaded) {
-      setLoading(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
+      sessionStorage.setItem("site_loaded", "true");
+    }, 2000);
 
-      const timer = setTimeout(() => {
-        setLoading(false);
-        sessionStorage.setItem("site_loaded", "true");
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, []);
+    return () => clearTimeout(timer);
+  }, [loading]);
 
   return (
     <>
-      {/* 🔥 Preloader only first visit */}
       <AnimatePresence>
         {loading && <Preloader />}
       </AnimatePresence>
 
-      {/* App ALWAYS mounted */}
       {!loading && (
         <div className="relative">
           <Header />
@@ -59,6 +56,7 @@ function App() {
             <Route path="/services" element={<ServicesDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/blog" element={<Blog />} />
           </Routes>
 
           <Footer />

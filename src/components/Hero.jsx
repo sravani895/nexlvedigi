@@ -58,7 +58,7 @@ export const Hero = () => {
               </motion.button>
 
               {/* View Work */}
-              <motion.button
+              <motion.button onClick={() => navigate("/blog")}
                 className="border border-white px-6 py-3 rounded-full text-white"
                 whileHover={{
                   scale: 1.05,

@@ -1,11 +1,36 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
+import {
+  FaEnvelope,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaGlobe,
+} from "react-icons/fa";
 
 export const Contact = () => {
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_mq3vk4h",
+        "template_mboz7qv",
+        e.target,
+        "q-VAiqFkRuq8UA_uh"
+      )
+      .then(() => {
+        alert("Message sent successfully!");
+        e.target.reset();
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to send message. Try again.");
+      });
+  };
+
   return (
     <section className="relative bg-gray-100 min-h-screen flex items-center px-6 py-16">
-
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
         {/* LEFT SIDE */}
@@ -18,8 +43,8 @@ export const Contact = () => {
           </h1>
 
           <p className="mt-6 text-gray-500 max-w-md">
-            Whether you have questions about our services, need support, 
-            or want to share your feedback, our dedicated team is here 
+            Whether you have questions about our services, need support,
+            or want to share your feedback, our dedicated team is here
             to assist you every step of the way.
           </p>
 
@@ -30,7 +55,9 @@ export const Contact = () => {
               <FaEnvelope className="mt-1" />
               <div>
                 <h4 className="font-semibold">Email</h4>
-                <p className="text-sm">nexlvedigiprivatelimited@gmail.com</p>
+                <p className="text-sm">
+                  nexlvedigiprivatelimited@gmail.com
+                </p>
               </div>
             </div>
 
@@ -61,46 +88,56 @@ export const Contact = () => {
           </div>
         </motion.div>
 
-        {/* RIGHT SIDE (FORM) */}
+        {/* RIGHT SIDE FORM */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           className="bg-white p-8 rounded-2xl shadow-md"
         >
-          <form className="flex flex-col gap-5">
-
+          <form
+            onSubmit={sendEmail}
+            className="flex flex-col gap-5"
+          >
             <input
               type="text"
+              name="name"
               placeholder="Your Name"
+              required
               className="bg-gray-200 px-5 py-4 rounded-full outline-none"
             />
 
             <input
               type="email"
+              name="email"
               placeholder="Email Address"
+              required
               className="bg-gray-200 px-5 py-4 rounded-full outline-none"
             />
 
             <input
               type="text"
+              name="phone"
               placeholder="Phone Number"
+              required
               className="bg-gray-200 px-5 py-4 rounded-full outline-none"
             />
 
             <textarea
               rows="4"
+              name="message"
               placeholder="Message"
+              required
               className="bg-gray-200 px-5 py-4 rounded-2xl outline-none"
             ></textarea>
 
             <motion.button
+              type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gray-700 text-white py-3 rounded-full w-32"
             >
               Submit
             </motion.button>
-
           </form>
         </motion.div>
 
