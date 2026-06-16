@@ -4,7 +4,7 @@ const teamMembers = [
   {
     name: "Harshavardhan Reddy Chavali Venkata",
     role: "Founder & CEO",
-    image: "/images/founder.jpg",
+    image: "/images/founder.jpeg",
     description: "Technology entrepreneur passionate about AI and innovation.",
   },
   {
